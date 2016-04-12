@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public Transform groundCheck;
     public Text ScoreLabel;
+<<<<<<< HEAD
+=======
+	public GameObject beamController;
+	public GameObject beamController2;
+	public GameObject beamPoint;
+>>>>>>> parent of c58d3cc... Fixed game controller
 
 
     //Health states and scores
@@ -76,6 +82,18 @@ public class PlayerController : MonoBehaviour {
     private AudioSource _gameClear;
 
 
+    //Set audio variables
+    private AudioSource[] _audioSources;
+    private AudioSource _jumpSound;
+    private AudioSource _coinSound;
+    private AudioSource _powerUpSound;
+    private AudioSource _deadSound;
+    private AudioSource _hurtSound;
+    private AudioSource _gameover;
+    private AudioSource _backSound;
+    private AudioSource _gameClear;
+
+
 
     // Use this for initialization
     void Start()
@@ -95,6 +113,7 @@ public class PlayerController : MonoBehaviour {
 
         // Setup AudioSources
         this._audioSources = gameObject.GetComponents<AudioSource>();
+<<<<<<< HEAD
         this._jumpSound = this._audioSources[0];
         this._powerUpSound = this._audioSources[1];
         this._deadSound = this._audioSources[2];
@@ -105,6 +124,20 @@ public class PlayerController : MonoBehaviour {
         this._gameClear = this._audioSources[7];
 
         this.GameoverUI.SetActive(false);
+=======
+		this._coinSound = this._audioSources[0];
+		this._deadSound = this._audioSources[1];
+		this._gameClear = this._audioSources[2];
+		this._gameover = this._audioSources[3];
+		this._hurtSound = this._audioSources[4];
+		this._backSound = this._audioSources[5];
+        this._jumpSound = this._audioSources[6];
+        this._powerUpSound = this._audioSources[7];
+
+        this.GameoverUI.SetActive(false);
+
+		this._animator.SetBool("isTouchedSpring", false);
+>>>>>>> parent of c58d3cc... Fixed game controller
     }
 
     // Update is called once per frame
@@ -182,6 +215,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
             this._jumpSound.Play();
+<<<<<<< HEAD
 
 
         }
@@ -193,6 +227,27 @@ public class PlayerController : MonoBehaviour {
             this.curHealth = this.maxHealth;
         }
 
+=======
+        }
+
+		if (Input.GetKeyDown ("space")) {			
+			if (this._facingRight) {
+				GameObject _beam = (GameObject)Instantiate (this.beamController);
+				_beam.transform.position = this.beamPoint.transform.position;
+			} else {
+				GameObject _beam2 = (GameObject)Instantiate (this.beamController2);
+				_beam2.transform.position = this.beamPoint.transform.position;
+			}
+		}
+
+        //this._checkBounds();
+
+        if (this.curHealth > this.maxHealth)
+        {
+            this.curHealth = this.maxHealth;
+        }
+
+>>>>>>> parent of c58d3cc... Fixed game controller
         if(this.curHealth <= 0)
         {
             Die();
@@ -232,13 +287,21 @@ public class PlayerController : MonoBehaviour {
         if(col.gameObject.CompareTag("Death"))
         {
             this._deadSound.Play();       
+<<<<<<< HEAD
             this._transform.position = new Vector3(-133.9f, -157.4f, 0);
+=======
+            this._transform.position = new Vector3(-363f, -736f, 0);
+>>>>>>> parent of c58d3cc... Fixed game controller
             this.curHealth -= 1;
         }
 
         if (col.gameObject.CompareTag("goldCoins"))
         {
+<<<<<<< HEAD
             Debug.Log("Touch the gold coin");
+=======
+           // Debug.Log("Touch the gold coin");
+>>>>>>> parent of c58d3cc... Fixed game controller
             this._coinSound.Play();
             Destroy(col.gameObject);
             this.score += 200;
@@ -251,7 +314,18 @@ public class PlayerController : MonoBehaviour {
             this.score += 100;
         }
 
+<<<<<<< HEAD
         if (col.gameObject.CompareTag("Enemy"))
+=======
+		if (col.gameObject.CompareTag("Star"))
+		{
+			this._coinSound.Play();
+			Destroy(col.gameObject);
+			this.score += 125;
+		}
+
+		if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("FrogEnemy") || col.gameObject.CompareTag("GhostEnemy"))
+>>>>>>> parent of c58d3cc... Fixed game controller
         {
             Destroy(col.gameObject);
             this.Damage(1);
