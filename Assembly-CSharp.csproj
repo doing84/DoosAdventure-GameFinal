@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{80F0BB20-F656-CC18-72F3-26A2CD9D29F2}</ProjectGuid>
+    <ProjectGuid>{3615D129-25AD-1A29-81B4-A97C6C386D4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -45,8 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Scripts\BeamController.cs" />
+     <Compile Include="Assets\_Scripts\BeamController2.cs" />
      <Compile Include="Assets\_Scripts\CameraFollow.cs" />
      <Compile Include="Assets\_Scripts\CoinController.cs" />
+     <Compile Include="Assets\_Scripts\ExplosionController.cs" />
+     <Compile Include="Assets\_Scripts\FallingTileController.cs" />
+     <Compile Include="Assets\_Scripts\FrogAI.cs" />
+     <Compile Include="Assets\_Scripts\FrogController.cs" />
+     <Compile Include="Assets\_Scripts\GhostAI.cs" />
+     <Compile Include="Assets\_Scripts\GhostController.cs" />
+     <Compile Include="Assets\_Scripts\GlobalControl.cs" />
      <Compile Include="Assets\_Scripts\HUD.cs" />
      <Compile Include="Assets\_Scripts\HomeMenu.cs" />
      <Compile Include="Assets\_Scripts\Menu.cs" />
@@ -56,6 +65,7 @@
      <Compile Include="Assets\_Scripts\SpawnController.cs" />
      <Compile Include="Assets\_Scripts\Spikes.cs" />
      <Compile Include="Assets\_Scripts\SpringController.cs" />
+     <Compile Include="Assets\_Scripts\StarController.cs" />
      <Compile Include="Assets\_Scripts\WalkingEneController.cs" />
      <Compile Include="Assets\_Scripts\coin_spwn.cs" />
      <Compile Include="Assets\_Scripts\plat_down.cs" />

@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     public float moveForce;
     public float jumpForce;
     public Transform groundCheck;
+<<<<<<< HEAD
     public Text ScoreLabel;
 <<<<<<< HEAD
 =======
@@ -48,39 +49,27 @@ public class PlayerController : MonoBehaviour {
 	public GameObject beamController2;
 	public GameObject beamPoint;
 >>>>>>> parent of c58d3cc... Fixed game controller
+=======
+	public GameObject beamController;
+	public GameObject beamController2;
+	public GameObject beamPoint;
+>>>>>>> refs/remotes/origin/master
 
 
-    //Health states and scores
-    public int curHealth = 4;
-    public int maxHealth = 4;
-    public int score = 0;
     public bool canDoubleJump;
     //public Animation hurtAnim;
 
-
-    //Game over UI
-    public GameObject GameoverUI;
-    public GameObject GameClearUI;
+	public HUD hud;
 
     // PRIVATE Instance variables
     private Animator _animator;
     private float _move;
+	private float _jump;
     private bool _facingRight;
     private Transform _transform;
     private Rigidbody2D _rigidBody2d;
     private bool _isGrounded;
-
-    //Set audio variables
-    private AudioSource[] _audioSources;
-    private AudioSource _jumpSound;
-    private AudioSource _coinSound;
-    private AudioSource _powerUpSound;
-    private AudioSource _deadSound;
-    private AudioSource _hurtSound;
-    private AudioSource _gameover;
-    private AudioSource _backSound;
-    private AudioSource _gameClear;
-
+	private bool _isTouchedSpring;
 
     //Set audio variables
     private AudioSource[] _audioSources;
@@ -98,6 +87,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+		
         //Initialize public instance variables
         this.velocityRange = new VelocityRange(300f, 10000f);
         
@@ -109,6 +99,7 @@ public class PlayerController : MonoBehaviour {
         this._move = 0f;
         this._facingRight = true;
 
+<<<<<<< HEAD
         this.curHealth = this.maxHealth;
 
         // Setup AudioSources
@@ -138,6 +129,9 @@ public class PlayerController : MonoBehaviour {
 
 		this._animator.SetBool("isTouchedSpring", false);
 >>>>>>> parent of c58d3cc... Fixed game controller
+=======
+		this._animator.SetBool("isTouchedSpring", false);
+>>>>>>> refs/remotes/origin/master
     }
 
     // Update is called once per frame
@@ -149,6 +143,9 @@ public class PlayerController : MonoBehaviour {
                             this.groundCheck.position, 
                             1 << LayerMask.NameToLayer("Ground"));
 
+
+	//	Debug.Log ("is touched spring?: " + this._isTouchedSpring);
+
         //get absolute value of velocity for game object
         float VelX = this._rigidBody2d.velocity.x;
         float VelY = this._rigidBody2d.velocity.y;
@@ -158,6 +155,7 @@ public class PlayerController : MonoBehaviour {
 
 
         this._move = Input.GetAxis("Horizontal");
+		this._jump = Input.GetAxis("Vertical");
    
         //Move the player
         this._rigidBody2d.AddForce((Vector2.right * this.moveForce) * this._move);
@@ -195,7 +193,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Jump 
-        if (Input.GetButtonDown("Jump"))
+		if (this._jump > 0)
         {
 
 
@@ -214,6 +212,7 @@ public class PlayerController : MonoBehaviour {
 
                 }
             }
+<<<<<<< HEAD
             this._jumpSound.Play();
 <<<<<<< HEAD
 
@@ -252,6 +251,21 @@ public class PlayerController : MonoBehaviour {
         {
             Die();
         }
+=======
+			this.hud._audioSources [6].Play ();
+        }
+
+		if (Input.GetKeyDown ("space")) {			
+			if (this._facingRight) {
+				GameObject _beam = (GameObject)Instantiate (this.beamController);
+				_beam.transform.position = this.beamPoint.transform.position;
+			} else {
+				GameObject _beam2 = (GameObject)Instantiate (this.beamController2);
+				_beam2.transform.position = this.beamPoint.transform.position;
+			}
+		}
+			
+>>>>>>> refs/remotes/origin/master
     }
 
     private void _flip()
@@ -286,6 +300,7 @@ public class PlayerController : MonoBehaviour {
     {
         if(col.gameObject.CompareTag("Death"))
         {
+<<<<<<< HEAD
             this._deadSound.Play();       
 <<<<<<< HEAD
             this._transform.position = new Vector3(-133.9f, -157.4f, 0);
@@ -293,27 +308,38 @@ public class PlayerController : MonoBehaviour {
             this._transform.position = new Vector3(-363f, -736f, 0);
 >>>>>>> parent of c58d3cc... Fixed game controller
             this.curHealth -= 1;
+=======
+			this.hud._audioSources[1].Play();   
+            this._transform.position = new Vector3(-363f, -736f, 0);
+			this.hud.curHealth -= 1;
+>>>>>>> refs/remotes/origin/master
         }
 
         if (col.gameObject.CompareTag("goldCoins"))
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             Debug.Log("Touch the gold coin");
 =======
            // Debug.Log("Touch the gold coin");
 >>>>>>> parent of c58d3cc... Fixed game controller
             this._coinSound.Play();
+=======
+           // Debug.Log("Touch the gold coin");
+			this.hud._audioSources[0].Play();
+>>>>>>> refs/remotes/origin/master
             Destroy(col.gameObject);
-            this.score += 200;
+			this.hud.curScore += 200;
         }
 
         if (col.gameObject.CompareTag("bronzeCoins"))
         {
-            this._coinSound.Play();
+			this.hud._audioSources[0].Play();
             Destroy(col.gameObject);
-            this.score += 100;
+			this.hud.curScore += 100;
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (col.gameObject.CompareTag("Enemy"))
 =======
@@ -326,6 +352,16 @@ public class PlayerController : MonoBehaviour {
 
 		if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("FrogEnemy") || col.gameObject.CompareTag("GhostEnemy"))
 >>>>>>> parent of c58d3cc... Fixed game controller
+=======
+		if (col.gameObject.CompareTag("Star"))
+		{
+			this.hud._audioSources[0].Play();
+			Destroy(col.gameObject);
+			this.hud.curScore += 125;
+		}
+
+		if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("FrogEnemy") || col.gameObject.CompareTag("GhostEnemy"))
+>>>>>>> refs/remotes/origin/master
         {
             Destroy(col.gameObject);
             this.Damage(1);
@@ -335,32 +371,17 @@ public class PlayerController : MonoBehaviour {
 
         if (col.gameObject.CompareTag("final"))
         {
-            GameClear();
+			this.hud.curLevel = 2;
+			this.hud.GameClear ();
         }
     }
-
-    void Die()
-    {
-        this._backSound.Stop();
-        this._gameover.Play();
-        this.GameoverUI.SetActive(true);
-        this.ScoreLabel.text = "Score: " + this.score;
-        this.ScoreLabel.enabled = true;
-
-    }
-
-    void GameClear()
-    {
-        this._backSound.Stop();
-        this._gameClear.Play();
-        this.GameClearUI.SetActive(true);
-        
-    }
+		
 
     public void Damage(int dmg)
     {
-        this.curHealth -= dmg;
-        this._hurtSound.Play();
+		
+		this.hud.curHealth -= dmg;
+		this.hud._audioSources[4].Play();
         //gameObject.GetComponent<Animation>().Play("hurt");
     }
 
